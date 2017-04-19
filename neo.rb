@@ -454,6 +454,7 @@ ENDTEXT
     # Class methods for the Neo test suite.
     class << self
       def inherited(subclass)
+        puts "inherited"
         subclasses << subclass
       end
 
@@ -508,8 +509,10 @@ ENDTEXT
 
   class ThePath
     def walk
+      puts "before sensei new"
       sensei = Neo::Sensei.new
       each_step do |step|
+        puts "before step"
         sensei.observe(step.meditate)
       end
       sensei.instruct
@@ -518,6 +521,7 @@ ENDTEXT
     def each_step
       catch(:neo_exit) {
         step_count = 0
+        puts "before subclasses"
         Neo::Koan.subclasses.each_with_index do |koan,koan_index|
           koan.testmethods.each do |method_name|
             step = koan.new(method_name, koan.to_s, koan_index+1, step_count+=1)
@@ -530,6 +534,9 @@ ENDTEXT
 end
 
 END {
+  # how is this running after all requires?
+  puts "before command_line(ARGV)"
   Neo::Koan.command_line(ARGV)
+  puts "before walk"
   Neo::ThePath.new.walk
 }

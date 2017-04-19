@@ -1,8 +1,10 @@
 # The path to Ruby Enlightenment starts with the following:
-
+puts "before load_path"
 $LOAD_PATH << File.dirname(__FILE__)
+puts "after load_path"
 
 require 'about_asserts'
+puts "after require about_asserts"
 require 'about_nil'
 require 'about_objects'
 require 'about_arrays'
@@ -39,3 +41,5 @@ in_ruby_version("jruby") do
   require 'about_java_interop'
 end
 require 'about_extra_credit'
+
+puts "done requiring / inheriting"
